@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"io"
+	// "net/http"
 
 	"github.com/webview/webview"
 )
@@ -27,8 +28,8 @@ var app embed.FS
 func main() {
 	// http.HandleFunc("/", handler)
 
-	// fmt.Println("go listening: 3000")
-	// http.ListenAndServe(":3000", nil)
+	// fmt.Println("go listening: 3030")
+	// http.ListenAndServe(":3030", nil)
 
 	mountDir, err := os.MkdirTemp("", "app")
 	if err != nil {
