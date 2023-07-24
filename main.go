@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 	"io"
-	// "net/http"
+	"net/http"
 
 	"github.com/webview/webview"
 )
@@ -21,15 +21,19 @@ var php []byte
 //go:embed app/*
 var app embed.FS
 
-// func handler(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Println(w, "You requested: %s\n", r.URL.Path)
-// }
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(w, "You requested: %s\n", r.URL.Path)
+}
 
 func main() {
-	// http.HandleFunc("/", handler)
+	http.HandleFunc("/", handler)
 
-	// fmt.Println("go listening: 3030")
-	// http.ListenAndServe(":3030", nil)
+	go func() {
+		fmt.Println("go listening: 3030")
+		log.Fatal(http.ListenAndServe(":3030", nil))
+	}()
+
+	fmt.Println("Continuing...")
 
 	mountDir, err := os.MkdirTemp("", "app")
 	if err != nil {
